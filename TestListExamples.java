@@ -1,5 +1,7 @@
 import static org.junit.Assert.*;
 import org.junit.*;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,5 +19,23 @@ public class TestListExamples {
     List<String> merged = ListExamples.merge(left, right);
     List<String> expected = Arrays.asList("a", "a", "b", "c", "d");
     assertEquals(expected, merged);
+  }
+
+  @Test
+  public void testFilter(){
+    List<String> input = new ArrayList<>();
+    input.add("moon");
+    input.add("Moon");
+    input.add("FHUIHFUIE");
+    input.add("hfuirjhkwe");
+    input.add("mOOn");
+    List<String> result = new ArrayList<>();
+    StringChecker sc = new IsMoon();
+    for(String s: input) {
+      if(sc.checkString(s)) {
+        result.add(s);
+      }
+    }
+    assertEquals(result, ListExamples.filter(input, sc));
   }
 }
